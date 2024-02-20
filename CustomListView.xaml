@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ListView
+    x:Class="ReusableListView.CustomListView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:ReusableListView"
+    x:Name="this">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+                <Grid ColumnDefinitions="Auto, Auto, *" RowDefinitions="*, *">
+                    <Grid Grid.RowSpan="2" Grid.Column="0">
+                        <CheckBox HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        BackgroundColor="LightGray"
+                        HorizontalOptions="Start"
+                        WidthRequest="1"
+                        Color="LightGray" />
+                    <Grid
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        BindableLayout.ItemTemplate="{Binding PartialTemplate, Source={x:Reference this}}"
+                        BindableLayout.ItemsSource="{Binding ., Converter={converter:DataTemplateItemSourceConverter}}" />
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
